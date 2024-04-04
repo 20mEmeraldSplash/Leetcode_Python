@@ -1,0 +1,43 @@
+class MyQueue(object):
+
+    def __init__(self):
+        self.stackIn = []
+        self.stackOut = []
+
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: None
+        """
+        self.stackIn.append(x)
+
+    def pop(self):
+        """
+        :rtype: int
+        """
+        if not self.stackOut:  # 如果stackOut为空
+            while self.stackIn:  # 将stackIn中的元素移动到stackOut
+                self.stackOut.append(self.stackIn.pop())
+        return self.stackOut.pop()  # 弹出stackOut的栈顶元素
+    def peek(self):
+        """
+        :rtype: int
+        """
+        if not self.stackOut:  # 如果stackOut为空
+            while self.stackIn:  # 将stackIn中的元素移动到stackOut
+                self.stackOut.append(self.stackIn.pop())
+        return self.stackOut[-1]  # 弹出stackOut的栈顶元素
+
+    def empty(self):
+        """
+        :rtype: bool
+        """
+        return not self.stackIn and not self.stackOut
+
+
+# Your MyQueue object will be instantiated and called as such:
+# obj = MyQueue()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.peek()
+# param_4 = obj.empty()
