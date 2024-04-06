@@ -1,0 +1,17 @@
+class Solution(object):
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        count = {}
+        for num in nums:
+            if num in count:
+                count[num] += 1
+            else:
+                count[num] = 1
+        
+        # 遍历哈希表，找到只出现一次的数字
+        for num, freq in count.items():
+            if freq == 1:
+                return num
