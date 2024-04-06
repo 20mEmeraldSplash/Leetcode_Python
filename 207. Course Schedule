@@ -1,0 +1,23 @@
+class Solution(object):
+    def canFinish(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        tuopu = [[] for _ in range (numCourses)]
+        prenum = [0] * numCourses
+
+        for a,b in prerequisites:
+            tuopu[b].append(a)
+            prenum[a] += 1
+
+        queue = [i for i in range(numCourses) if prenum[i] == 0]
+        while queue:
+            class1 = queue.pop(0)
+            for c in tuopu[class1]:
+                prenum[c] -= 1
+                if prenum[c] == 0:  # 只有当入度减为0时，才将顶点加入队列
+                    queue.append(c)
+        
+        return all(prenum[i] == 0 for i in range(numCourses))
