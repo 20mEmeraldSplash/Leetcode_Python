@@ -1,0 +1,22 @@
+class Solution(object):
+    def floodFill(self, image, sr, sc, color):
+        """
+        :type image: List[List[int]]
+        :type sr: int
+        :type sc: int
+        :type color: int
+        :rtype: List[List[int]]
+        """
+        rows = len(image)
+        cols = len(image[0])
+        check = image[sr][sc]
+        def helper(sr, sc):
+            if sr < 0 or sr >= rows or sc < 0 or sc >= cols or image[sr][sc] == color or image[sr][sc] != check:
+                return 
+            image[sr][sc] = color    
+            helper(sr - 1, sc)
+            helper(sr + 1, sc)
+            helper(sr, sc + 1)
+            helper(sr, sc - 1)
+        helper(sr, sc)
+        return image
