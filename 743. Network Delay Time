@@ -1,5 +1,4 @@
-import heapq  # 导入heapq模块，用于实现优先队列
-
+import heapq
 class Solution(object):
     def networkDelayTime(self, times, n, k):
         """
@@ -8,19 +7,16 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        # 构建图的邻接列表表示
         graph = {}
-        for u, v, w in times:
+        for u,v,w in times:
             if u not in graph:
                 graph[u] = []
-            graph[u].append((v, w))
+            graph[u].append((v,w))
 
-        # 初始化距离数组和优先队列
-        distance = [float('inf')] * (n + 1)
+        distance = [float('inf')] * (n+1)
         distance[k] = 0
-        priority_queue = [(0, k)]  # (距离, 节点)
+        priority_queue = [(0,k)]
 
-        # Dijkstra算法主循环
         while priority_queue:
             dist, node = heapq.heappop(priority_queue)
             if dist > distance[node]:
@@ -29,8 +25,7 @@ class Solution(object):
                 new_dist = dist + weight
                 if new_dist < distance[neighbor]:
                     distance[neighbor] = new_dist
-                    heapq.heappush(priority_queue, (new_dist, neighbor))
+                    heapq.heappush(priority_queue,(new_dist, neighbor)) #什么玩意
 
-        # 检查是否所有节点都被访问
-        max_dist = max(distance[1:])  # 忽略索引0，因为节点编号从1开始
+        max_dist = max(distance[1:])
         return max_dist if max_dist < float('inf') else -1
