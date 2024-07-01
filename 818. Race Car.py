@@ -32,4 +32,4 @@ class Solution(object):
 
             steps += 1 #每个for代表了广度优先搜索 (BFS) 的一层，也就是从当前层扩展到下一层的过程。
         return -1
-            
+ #复杂度：O(Target∗Log(Target))           
