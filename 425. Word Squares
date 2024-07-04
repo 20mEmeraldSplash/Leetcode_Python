@@ -1,0 +1,39 @@
+class Solution(object):
+    def wordSquares(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[List[str]]
+        """
+        def createsquare(s):
+            if len(s) == len(s[0]):
+                result.append(s[:])
+                return
+            else:
+                prefix = ''.join([word[len(s)] for word in s]) #这里有些难想
+                if prefix in pre_map:
+                    for p in pre_map[prefix]:
+                        s.append(p)
+                        createsquare(s)
+                        s.pop()
+
+        # 构建前缀哈希表
+        pre_map = {}
+        for w in words:
+            for i in range (4):
+                prefix = w[:i+1]
+                if prefix in pre_map: 
+                    pre_map[prefix].append(w)
+                else:
+                    pre_map[prefix] = [w]
+        
+        result=[]
+        for w in words: #考虑每个单词做第一行的可能性
+            createsquare([w])
+
+
+时间复杂度是 O(n^l)，空间复杂度是 O(n * l^2)
+        
+        return result
+
+
+
