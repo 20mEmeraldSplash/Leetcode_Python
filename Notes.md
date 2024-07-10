@@ -1,4 +1,4 @@
-当然可以！以下是关于Python中 `Counter`、`defaultdict` 和 `enumerate` 的详细讲解：
+
 
 ## Python 的 Counter, defaultdict 和 enumerate
 
@@ -82,21 +82,26 @@ for index, fruit in enumerate(fruits, start=1):
 
 这些工具在处理数据时非常有用，`Counter` 可以轻松统计元素出现次数，`defaultdict` 可以避免键不存在时的错误，`enumerate` 则可以在迭代时获取元素的索引。希望这些示例能帮助你更好地理解它们的用法。
 
+---
+
+## 在 Python 中表示无限大
+
 在Python中，表示无限大主要有两种方式：
 
-使用 float('inf') 或 float('-inf')：
+### 使用 `float('inf')` 或 `float('-inf')`
 
+---
 
-`result.append(s[:])` 和 `result.append(s)` 之间的区别在于它们在处理列表时的行为不同，尤其是在递归或需要处理可变对象（如列表）时。具体来说：
+## `result.append(s[:])` 和 `result.append(s)` 的区别
 
 ### `result.append(s[:])`
 - `s[:]` 是对列表 `s` 的一个浅拷贝。这意味着创建了一个新的列表，其内容与 `s` 相同，但它是一个独立的对象。
-- 因此，当你在 `result` 中添加 `s[:]` 时，`result` 中的元素不会因为后续对 `s` 的修改而改变。
+- 当你在 `result` 中添加 `s[:]` 时，`result` 中的元素不会因为后续对 `s` 的修改而改变。
 - 这是在递归或回溯算法中常用的方式，以确保结果列表中的每个条目都保持独立和正确。
 
 ### `result.append(s)`
 - `result.append(s)` 是将列表 `s` 的引用添加到 `result` 中。`result` 中的元素指向 `s` 本身，而不是它的拷贝。
-- 因此，如果 `s` 在后续的操作中被修改，那么 `result` 中的相应元素也会受到影响。
+- 如果 `s` 在后续的操作中被修改，那么 `result` 中的相应元素也会受到影响。
 - 这种方式在某些情况下是有效的，但在递归或需要保存中间状态时可能会导致意外行为，因为结果列表中的元素会随 `s` 的变化而变化。
 
 ### 示例
@@ -143,6 +148,9 @@ print(result)
 输出可能会是许多相同的列表，取决于递归结束时 `s` 的状态，这通常不是我们想要的结果。
 
 因此，在递归或回溯算法中使用 `result.append(s[:])` 是为了确保结果的正确性和独立性。
+
+---
+
 # Python Notes: Using `collections.deque`
 
 ## Introduction
